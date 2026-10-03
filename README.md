@@ -34,14 +34,20 @@ Use `/webhook-test/intake` while the workflow is open in the editor, and
 
 ## Setup
 
-1. In n8n, choose **Import from file** and select `intake-workflow.json`.
-2. Connect your own credentials on the MongoDB, Google Sheets, and Gmail nodes.
-   The export contains no credentials.
-3. In the Google Sheets node, set your own spreadsheet URL (the file has a
-   `YOUR_SHEET_ID_HERE` placeholder). The sheet needs the headers
-   `Name`, `Email`, `Report`, `Timestamp`.
-4. Send the example request above and check that a document, a sheet row, and
-   an email appear.
+1. **Import Workflow:** In n8n, click **Workflows** > **Import from file** and select `intake-workflow.json`.
+2. **Configure Credentials:** Connect your credentials for the following nodes:
+   - **MongoDB** (Specify your database name and ensure the collection is set to `n8n`).
+   - **Google Sheets** (Authenticate your Google account).
+   - **Gmail** (Authenticate your OAuth2/App Password for sending email).
+3. **Set Up Google Sheet:**
+   - Create a Google Sheet with column headers in row 1: `Name`, `Email`, `Report`, `Timestamp`.
+   - Open the **Append row in sheet** node and replace `YOUR_SHEET_ID_HERE` with your actual Google Sheet ID (or paste your sheet URL).
+   - Verify the tab name matches `Sheet1` (or select your active tab name).
+4. **Test the Workflow:**
+   - Click **Test step** or **Listen for Test Event** in n8n.
+   - Run the example `curl` request in your terminal using `/webhook-test/intake`.
+   - Verify that data appears in MongoDB, Google Sheets, and your inbox.
+5. **Activate:** Toggle the workflow switch in n8n from **Inactive** to **Active** to start receiving production webhooks via `/webhook/intake`.
 
 ## Known limitations
 
